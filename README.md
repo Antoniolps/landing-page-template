@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Landing Template
 
-## Getting Started
+A reusable landing page starter built with Next.js 14, the App Router, and Tailwind CSS. Swap in client-specific copy, CTAs, and pricing by editing one content file—no layout changes needed.
 
-First, run the development server:
+## Quick start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app runs on [http://localhost:3000](http://localhost:3000). Update content in `lib/landing-config.ts` and the UI will refresh instantly.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Customize in minutes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Brand & navigation:** Set the logo text, tagline, and navigation anchors at the top of `landing-config.ts`.
+- **Hero module:** Update the headline, subcopy, CTAs, and highlight bullets.
+- **Sections:** Features, testimonials, pricing, FAQs, and contact form all read from the same config file, so you can tailor velocity per client or wire up a CMS later.
+- **Styling:** Tailwind classes power every section—extend utility classes or override them in `app/globals.css`.
 
-## Learn More
+## Included sections
 
-To learn more about Next.js, take a look at the following resources:
+- Responsive header with CTA
+- Conversion-focused hero with stats card
+- Feature grid and testimonial highlights
+- Pricing cards with call-to-action buttons
+- Expandable FAQ accordion
+- Contact form and footer links
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS + PostCSS pipeline
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy wherever you prefer—Vercel, Netlify, or your own infrastructure. Add integrations (forms, analytics, CMS) by extending the server components or API routes in `app/`.
