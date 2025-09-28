@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { LandingConfig } from "@/lib/landing-config";
+import { Button } from "@/components/ui/button";
 
 type PricingProps = LandingConfig["pricing"] & {
   id?: string;
@@ -32,12 +33,9 @@ export function PricingSection({ title, subtitle, plans, id }: PricingProps) {
                   ))}
                 </ul>
               </div>
-              <Link
-                href={plan.callToAction.href}
-                className="mt-8 inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
-              >
-                {plan.callToAction.label}
-              </Link>
+              <Button asChild className="mt-8">
+                <Link href={plan.callToAction.href}>{plan.callToAction.label}</Link>
+              </Button>
             </div>
           ))}
         </div>
@@ -45,4 +43,3 @@ export function PricingSection({ title, subtitle, plans, id }: PricingProps) {
     </section>
   );
 }
-

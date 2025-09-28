@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 import {
   type ActionLink,
@@ -11,6 +15,9 @@ import { FeaturesSection } from "@/components/sections/Features";
 import { HeroSection } from "@/components/sections/Hero";
 import { PricingSection } from "@/components/sections/Pricing";
 import { TestimonialsSection } from "@/components/sections/Testimonials";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { AnimatedSection } from "@/components/ui/animated-section";
 
 export default function Home() {
   const {
@@ -35,11 +42,21 @@ export default function Home() {
       />
       <main className="flex-1">
         <HeroSection id="top" brand={brand} hero={hero} stats={stats} />
-        <FeaturesSection id="services" {...features} />
-        <TestimonialsSection id="testimonials" {...testimonials} />
-        <PricingSection id="pricing" {...pricing} />
-        <FAQSection id="faqs" {...faqs} />
-        <ContactSection {...contact} />
+        <AnimatedSection>
+          <FeaturesSection id="services" {...features} />
+        </AnimatedSection>
+        <AnimatedSection>
+          <TestimonialsSection id="testimonials" {...testimonials} />
+        </AnimatedSection>
+        <AnimatedSection>
+          <PricingSection id="pricing" {...pricing} />
+        </AnimatedSection>
+        <AnimatedSection>
+          <FAQSection id="faqs" {...faqs} />
+        </AnimatedSection>
+        <AnimatedSection>
+          <ContactSection {...contact} />
+        </AnimatedSection>
       </main>
       <SiteFooter brand={brand} footer={footer} />
     </div>
@@ -53,6 +70,8 @@ type HeaderProps = {
 };
 
 function SiteHeader({ brand, navigation, primaryAction }: HeaderProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-8">
@@ -66,12 +85,37 @@ function SiteHeader({ brand, navigation, primaryAction }: HeaderProps) {
             </Link>
           ))}
         </nav>
-        <Link
-          href={primaryAction.href}
-          className="hidden rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700 sm:inline-flex"
-        >
-          {primaryAction.label}
-        </Link>
+        <div className="flex items-center gap-4">
+          <Button asChild className="hidden sm:inline-flex">
+            <Link href={primaryAction.href}>
+              {primaryAction.label}
+            </Link>
+          </Button>
+          <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="md:hidden">
+                {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              </Button>
+            </SheetTrigger>
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle>{brand.name}</SheetTitle>
+              </SheetHeader>
+              <nav className="mt-8 flex flex-col gap-4">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="text-lg font-medium text-slate-600 transition hover:text-slate-900"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );

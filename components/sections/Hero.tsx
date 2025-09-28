@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { LandingConfig } from "@/lib/landing-config";
+import { Button } from "@/components/ui/button";
 
 type HeroProps = {
   brand: LandingConfig["brand"];
@@ -24,18 +25,12 @@ export function HeroSection({ brand, hero, stats, id }: HeroProps) {
             {hero.description}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href={hero.primaryAction.href}
-              className="inline-flex items-center justify-center rounded-full bg-sky-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-500/40 transition hover:bg-sky-300"
-            >
-              {hero.primaryAction.label}
-            </Link>
-            <Link
-              href={hero.secondaryAction.href}
-              className="inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:border-white hover:text-white"
-            >
-              {hero.secondaryAction.label}
-            </Link>
+            <Button asChild size="lg">
+              <Link href={hero.primaryAction.href}>{hero.primaryAction.label}</Link>
+            </Button>
+            <Button asChild variant="secondary" size="lg">
+              <Link href={hero.secondaryAction.href}>{hero.secondaryAction.label}</Link>
+            </Button>
           </div>
           <ul className="mt-10 grid gap-3 sm:grid-cols-3">
             {hero.highlights.map((highlight) => (
